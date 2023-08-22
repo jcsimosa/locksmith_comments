@@ -1,26 +1,34 @@
 import './App.css';
 import { useEffect, useState } from 'react';
 import LandingPage from './LandingPage';
+import Comments from './Comments';
 
 function App() {
 
-  let [car , setCar] = useState([])
+  let [cars , setCars] = useState([])
+  let [comment, setComment] = useState([])
 
   useEffect(() => {
     fetch('/all')
-    .then(res => res.json()).then(data => setCar(data))
+    .then(res => res.json()).then(data => setCars(data))
   },[])
   
   useEffect(() => {
     fetch('/comments')
-    .then(resp => resp.json()).then(data => (console.log(data)))
+    .then(resp => resp.json()).then(data => (setComment(data)))
   },[])
 
+  let allCars = cars.map((car) => {
+    return (
+        <LandingPage key={car.id} cars={car}/>
+    )
+})
+ 
 
   return (
     <div className="App">
-      <LandingPage/>
-
+      {allCars}
+      
     </div>
   );
 }

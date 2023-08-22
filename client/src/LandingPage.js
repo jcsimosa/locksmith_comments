@@ -1,11 +1,17 @@
 import React from "react";
 
-let LandingPage = ( )=> {
+let LandingPage = ({cars})=> {
+
+    console.log(cars)
     
+    
+   
+
     return(
      
         <div>
-            hello
+            <img src={cars.img}></img>
+            <h1>{cars.Make} {cars.Model} {cars.Year}</h1>
         </div>
     )
 }
