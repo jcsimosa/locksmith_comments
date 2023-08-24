@@ -18,16 +18,18 @@ function App() {
     .then(resp => resp.json()).then(data => (setComment(data)))
   },[])
 
-  let allCars = cars.map((car) => {
-    return (
-        <LandingPage key={car.id} cars={car}/>
-    )
-})
- 
+//   let allCars = cars.map((car) => {
+//     return (
+//         <LandingPage key={car.id} cars={car}/>
+//     )
+// })
+
 
   return (
     <div className="App">
-      {allCars}
+      <LandingPage cars={cars}/>
+      
+      {/* {allCars} */}
       
     </div>
   );
