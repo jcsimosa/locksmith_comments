@@ -1,7 +1,8 @@
 import './App.css';
 import { useEffect, useState } from 'react';
 import LandingPage from './LandingPage';
-import Comments from './Comments';
+import { Route, Routes } from 'react-router-dom';
+import Car from './Car';
 
 function App() {
 
@@ -27,7 +28,11 @@ function App() {
 
   return (
     <div className="App">
-      <LandingPage cars={cars}/>
+      <Routes>
+        <Route path='/' element={<LandingPage cars={cars}/>}></Route>
+        <Route path="cars/:Model/:id" element={<Car cars={cars}/>}></Route>
+      </Routes>
+        
       
       {/* {allCars} */}
       

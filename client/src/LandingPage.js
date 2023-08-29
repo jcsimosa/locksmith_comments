@@ -5,11 +5,7 @@ import { NavLink } from "react-router-dom";
 
 let LandingPage = ({cars})=> {
 
-    console.log(cars)
-    
-    let clickImg  = (e) => {
-        console.log(e)
-    }
+    // console.log(cars)
     
 
     return(
@@ -21,7 +17,7 @@ let LandingPage = ({cars})=> {
                     {cars.map((car) => (
                         <div key={car.id} className="group">
                             <div className="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-w-7 xl:aspect-h-8">
-                                <NavLink to={'null'}>
+                                <NavLink to={`/cars/${car.Model}/${car.id}`}>
                                     <img
                                     src={car.img}
                                     alt={car.img}
