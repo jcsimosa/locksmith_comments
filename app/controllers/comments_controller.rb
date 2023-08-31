@@ -8,4 +8,14 @@ class CommentsController < ApplicationController
         comment = Comment.find(params[:id])
         render json: comment, status: :ok
     end
+    def create 
+        comment = Comment.create(comments_params)
+        render json: comment, status: :created
+    end
+
+    private
+
+    def comments_params
+        params.permit(:comment, :car_id)
+    end
 end
