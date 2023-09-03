@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import LandingPage from './LandingPage';
 import { Route, Routes } from 'react-router-dom';
 import Car from './Car';
-
+import CreateACar from './CreateACar';
 function App() {
 
   let [cars , setCars] = useState([])
@@ -29,6 +29,7 @@ function App() {
   return (
     <div className="App">
       <Routes>
+        <Route path='/create_car' element={<CreateACar/>}></Route>
         <Route path='/' element={<LandingPage cars={cars}/>}></Route>
         <Route path="cars/:Model/:id" element={<Car cars={cars}/>}></Route>
       </Routes>

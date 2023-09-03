@@ -10,15 +10,17 @@ let Car = ({cars}) => {
     const params = useParams()
     const {id} = params
 
+   
+
     let submitComment = (e) => {
         e.preventDefault()
         let commentData = {
-            comment: newComment,
-            id: id
+            id: id,
+            comment: newComment
         }
         console.log(commentData)
 
-        fetch('/comments',{
+        fetch('/create_comment',{
             method: 'POST',
             headers:{'Content-Type':'application/json'},
             body : JSON.stringify(commentData)

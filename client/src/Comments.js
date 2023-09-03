@@ -2,7 +2,7 @@ import React from 'react';
 
 let Comments = ({comment}) => {
 
-    
+    console.log(comment)
 
     return (
 

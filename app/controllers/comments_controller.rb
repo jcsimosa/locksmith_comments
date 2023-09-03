@@ -8,8 +8,9 @@ class CommentsController < ApplicationController
         comment = Comment.find(params[:id])
         render json: comment, status: :ok
     end
-    def create 
+    def create_comments
         comment = Comment.create(comments_params)
+        debugger
         render json: comment, status: :created
     end
 
