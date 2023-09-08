@@ -19,12 +19,6 @@ function App() {
     .then(resp => resp.json()).then(data => (setComment(data)))
   },[])
 
-//   let allCars = cars.map((car) => {
-//     return (
-//         <LandingPage key={car.id} cars={car}/>
-//     )
-// })
-
 
   return (
     <div className="App">
@@ -33,9 +27,6 @@ function App() {
         <Route path='/' element={<LandingPage cars={cars}/>}></Route>
         <Route path="cars/:Model/:id" element={<Car cars={cars}/>}></Route>
       </Routes>
-        
-      
-      {/* {allCars} */}
       
     </div>
   );

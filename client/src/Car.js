@@ -15,9 +15,10 @@ let Car = ({cars}) => {
     let submitComment = (e) => {
         e.preventDefault()
         let commentData = {
-            id: id,
+            car_id: id,
             comment: newComment
         }
+        
         console.log(commentData)
 
         fetch('/create_comment',{
