@@ -23,13 +23,14 @@ let CreateACar = () => {
             lishi : lishi,
             test_blade : keyBlade
         }
+        console.log(carInfo)
 
         fetch('/cars', {
             method: "POST",
             headers:{'Content-Type': 'application/json'},
             body: JSON.stringify(carInfo)
         })
-        .then(r => r.json().then(console.log(r)))
+        .then(r => r.json().then(data => console.log(data)))
 
     }
 
@@ -129,7 +130,7 @@ let CreateACar = () => {
                                     type="text"
                                     name="releasedDate"
                                     required="releasedDate"
-                                    onChange={e => setYear(e.target.value)}
+                                    onChange={e => setCode(e.target.value)}
                                     className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                 />
                             </div>
@@ -146,7 +147,7 @@ let CreateACar = () => {
                                     type="text"
                                     name="releasedDate"
                                     required="releasedDate"
-                                    onChange={e => setYear(e.target.value)}
+                                    onChange={e => setLishi(e.target.value)}
                                     className="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                 />
                             </div>

@@ -10,7 +10,6 @@ class CommentsController < ApplicationController
     end
     def create_comments
         comment = Comment.create(comments_params)
-        debugger
         render json: comment, status: :created
     end
 
