@@ -1,7 +1,7 @@
 import React from "react";
 import {NavLink } from "react-router-dom";
 
-let NavBar = () => {
+let NavBar = ({searchBar}) => {
     
     return (
         <div>
@@ -25,7 +25,7 @@ let NavBar = () => {
                                             type="text"
                                             className="block w-full px-4 py-1 text-black-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
                                             placeholder="Search..."
-                                            onChange={null}
+                                            onChange={searchBar}
                                         />
                                     </div>  
                                 </div>  

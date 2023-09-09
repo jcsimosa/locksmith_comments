@@ -6,8 +6,9 @@ import Car from './Car';
 import CreateACar from './CreateACar';
 function App() {
 
-  let [cars , setCars] = useState([])
-  let [comment, setComment] = useState([])
+  const [cars , setCars] = useState([])
+  const [comment, setComment] = useState([])
+  const [filter , setFilter] = useState('')
 
   useEffect(() => {
     fetch('/all')
@@ -19,12 +20,32 @@ function App() {
     .then(resp => resp.json()).then(data => (setComment(data)))
   },[])
 
+  let newCar = (newCar) => {
+    setCars(cars => [...cars, newCar])
+  }
+
+  let searchBar = obj => {
+    setFilter(obj)
+  }
+  console.log(filter)
+
+  // const filteredCar = cars.filter((car) => {
+    
+  //   if (filter === ''){
+  //     return true
+  //   }
+  //   else {
+  //     return car.Model.toLowerCase().includes(filter.toLocaleLowerCase())
+  //   }
+  // })
+  
+  
 
   return (
     <div className="App">
       <Routes>
-        <Route path='/create_car' element={<CreateACar/>}></Route>
-        <Route path='/' element={<LandingPage cars={cars}/>}></Route>
+        <Route path='/create_car' element={<CreateACar newCar={newCar}/>}></Route>
+        <Route path='/' element={<LandingPage cars={cars} searchBar={searchBar}/>}></Route>
         <Route path="cars/:Model/:id" element={<Car cars={cars}/>}></Route>
       </Routes>
       

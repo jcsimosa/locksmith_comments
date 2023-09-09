@@ -1,8 +1,8 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 
-
-let CreateACar = () => {
+let CreateACar = ({newCar}) => {
     
     const [carImg, setCarImg] = useState('')
     const [make, setMake] = useState('')
@@ -11,6 +11,8 @@ let CreateACar = () => {
     const [lishi, setLishi] = useState('')
     const [code , setCode] = useState('')
     const [keyBlade, setKeyBlade] = useState('')
+
+    let navigate = useNavigate()
     
     let submitCarInfo = (e) => {
         e.preventDefault()
@@ -30,7 +32,11 @@ let CreateACar = () => {
             headers:{'Content-Type': 'application/json'},
             body: JSON.stringify(carInfo)
         })
-        .then(r => r.json().then(data => console.log(data)))
+        .then(r => r.json().then(data => {
+            newCar(data)
+            e.target.reset()
+            navigate('/')
+        }))
 
     }
 
