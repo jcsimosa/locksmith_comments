@@ -4,6 +4,9 @@ import LandingPage from './LandingPage';
 import { Route, Routes } from 'react-router-dom';
 import Car from './Car';
 import CreateACar from './CreateACar';
+import NavBar from "./NavBar";
+
+
 function App() {
 
   const [cars , setCars] = useState([])
@@ -25,27 +28,27 @@ function App() {
   }
 
   let searchBar = obj => {
-    setFilter(obj)
+    setFilter(obj.target.value)
   }
-  console.log(filter)
 
-  // const filteredCar = cars.filter((car) => {
-    
-  //   if (filter === ''){
-  //     return true
-  //   }
-  //   else {
-  //     return car.Model.toLowerCase().includes(filter.toLocaleLowerCase())
-  //   }
-  // })
+  const filteredCar = cars.filter((car) => {
+    console.log(car.Make)
+    if (filter === ''){
+      return true
+    }
+    else {
+      return car.Model.toLowerCase().includes(filter.toLocaleLowerCase())
+    }
+  })
   
   
 
   return (
     <div className="App">
+      <NavBar searchBar={searchBar}/>
       <Routes>
         <Route path='/create_car' element={<CreateACar newCar={newCar}/>}></Route>
-        <Route path='/' element={<LandingPage cars={cars} searchBar={searchBar}/>}></Route>
+        <Route path='/' element={<LandingPage cars={filteredCar} searchBar={searchBar}/>}></Route>
         <Route path="cars/:Model/:id" element={<Car cars={cars}/>}></Route>
       </Routes>
       
