@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Comments from "./Comments";
 
-let Car = ({cars}) => {
+let Car = () => {
 
     const [carInfo , setCarInfo] = useState([])
     const [carComments, setCarComments] = useState([])
@@ -11,14 +11,13 @@ let Car = ({cars}) => {
     const {id} = params
 
    
-
     let submitComment = (e) => {
         e.preventDefault()
         let commentData = {
             car_id: id,
             comment: newComment
         }
-        
+
         console.log(commentData)
 
         fetch('/create_comment',{
@@ -39,6 +38,7 @@ let Car = ({cars}) => {
         fetch(`/cars/${id}`)
         .then(r => r.json())
         .then(carData => {
+            console.log(carData)
             setCarInfo(carData)
             setCarComments(carData.comments)
         })
@@ -53,18 +53,78 @@ let Car = ({cars}) => {
 
     return(
 
-    <div>
-        <div className="flex items-center min-h-screen bg-gray-50">
-            <div className="flex-1 h-full max-w-4xl mx-auto bg-white rounded-lg shadow-xl">
-                <h1 className="flex items-center font-bold text-center text-2xl">{carInfo.Make} {carInfo.Model} {carInfo.Year}</h1>
-                   <div className="flex flex-col md:flex-row">
-                        <div className="h-32 md:h-auto md:w-1/2">
-                            <img className="object-cover w-full h-full" src={carInfo.img}
-                            alt="img" 
-                            />
-                        </div>
-                    
-                        <div className="flex items-center justify-center p-6 sm:p-12 md:w-1/2">
+<div>
+
+<link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/styles/tailwind.css"/>
+<link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css"/>
+
+
+<section class="relative pt-12 bg-blueGray-50">
+<div class="items-center flex flex-wrap">
+  <div class="w-full md:w-4/12 ml-auto mr-auto px-4">
+    <img alt="..." class="max-w-full rounded-lg shadow-lg" src={carInfo.img}/>
+  </div>
+  <div class="w-full md:w-5/12 ml-auto mr-auto px-4">
+    <div class="md:pr-12">
+      <h3 class="text-3xl font-semibold">{carInfo.Make} {carInfo.Model}</h3>
+      <p class="font-semibold mt-4 text-lg leading-relaxed text-blueGray-500">
+        Year:{carInfo.Year}
+      </p>
+      <ul class="list-none mt-6">
+        <li class="py-2">
+          <div class="flex items-center">
+            <div>
+              <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-black-600 bg-blue-200 mr-3"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+  <path strokeLinecap="round" strokeLinejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
+</svg>
+</span>
+            </div>
+            <div>
+              <h4 class="text-blueGray-500">
+                Lishi: {carInfo.lishi}
+              </h4>
+            </div>
+          </div>
+        </li>
+        <li class="py-2">
+          <div class="flex items-center">
+            <div>
+            <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-black-600 bg-blue-200 mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
+                </svg>
+            </span>
+            </div>
+            <div>
+              <h4 class="text-blueGray-500">Code: {carInfo.code}</h4>
+            </div>
+          </div>
+        </li>
+        <li class="py-2">
+          <div class="flex items-center">
+            <div>
+              <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-black-600 bg-blue-200 mr-3"> 
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
+                </svg>
+              </span>
+            </div>
+            <div>
+              <h4 class="text-blueGray-500">Test Blade: {carInfo.test_blade}</h4>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<footer class="relative  pt-8 pb-6 mt-8">
+  <div class="container mx-auto px-4">
+    <div class="flex flex-wrap items-center md:justify-between justify-center">
+      <div class="w-full md:w-6/12 px-4 mx-auto text-center">
+        
+        <div class="text-sm text-blueGray-500 font-semibold py-1">
+        <div className="">
                             <div className="w-full">
                             <div className="flex justify-center">
                             </div>
@@ -77,14 +137,14 @@ let Car = ({cars}) => {
                                     Comment:
                                     </label>
                                     <input 
-                                    className="w-full px-4 py-2 text-sm border rounded-md focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-600"
+                                    className="w-full px-4 py-2 text-sm border rounded-md focus:border-black-400 focus:outline-none focus:ring-1 focus:ring-black-600"
                                     placeholder="Comment Here"
                                     required 
                                     onChange={(e) => {setNewComment(e.target.value)}}
                                     name="comment"
                                     />
                                     <button
-                                        className="block w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg active:bg-grey-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue"
+                                        className="inline-flex items-center px-4 py-2 ml-4 text-xs font-semibold tracking-widest text-white uppercase transition duration-150 ease-in-out bg-gray-900 border border-transparent rounded-md active:bg-gray-900 false"
                                         >
                                         Create
                                     </button> 
@@ -93,12 +153,13 @@ let Car = ({cars}) => {
                             </div>
                             </div>
                         </div> 
-                    </div>
-            </div>
         </div>
-    
+      </div>
+    </div>
+  </div>
+</footer>
+</section>
         <h1 className="bold">Comments: {comments}</h1>
-
     </div>
     ) 
 }
