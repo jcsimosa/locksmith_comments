@@ -12,6 +12,12 @@ class CommentsController < ApplicationController
         comment = Comment.create(comments_params)
         render json: comment, status: :created
     end
+    
+    def destroy
+        comment=Comment.find params[:id]
+        comment.destroy
+        head :no_content 
+    end
 
     private
 

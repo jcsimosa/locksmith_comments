@@ -32,7 +32,6 @@ function App() {
   }
 
   const filteredCar = cars.filter((car) => {
-    console.log(car.Make)
     if (filter === ''){
       return true
     }

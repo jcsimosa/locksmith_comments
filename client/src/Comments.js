@@ -1,8 +1,11 @@
 import React from 'react';
 
-let Comments = ({comment}) => {
+let Comments = ({comment, deleteComment}) => {
 
-    console.log(comment)
+
+    let handleDelete = () => {
+        fetch("" ,)
+    }
 
     return (
 
@@ -21,7 +24,7 @@ let Comments = ({comment}) => {
                 <div className="justify-end mt-4">
                     <button
                     className="inline-flex items-center px-4 py-2 ml-4 text-xs font-semibold tracking-widest text-white uppercase transition duration-150 ease-in-out bg-gray-900 border border-transparent rounded-md active:bg-gray-900 false"
-                    onClick={null}
+                    onClick={deleteComment}
                     >
                        delete
                     </button>

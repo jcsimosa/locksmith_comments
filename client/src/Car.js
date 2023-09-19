@@ -13,12 +13,11 @@ let Car = () => {
    
     let submitComment = (e) => {
         e.preventDefault()
-        let commentData = {
+        const commentData = {
             car_id: id,
             comment: newComment
         }
 
-        console.log(commentData)
 
         fetch('/create_comment',{
             method: 'POST',
@@ -27,18 +26,24 @@ let Car = () => {
         })
         .then(r => {
             if (r.ok){
-                console.log('comment submitted')
+                r.json().then(r => {
+                    setCarComments(carComments => ([...carComments, r]))
+                })
             }
+            e.target.reset()
         })
     }
 
+    const deleteComment = (commentDeleted) => {
+        console.log(commentDeleted)
+        setCarComments(carComments.filter(comment => comment.id !== id))
+    }
 
 
     useEffect(()=> {
         fetch(`/cars/${id}`)
         .then(r => r.json())
         .then(carData => {
-            console.log(carData)
             setCarInfo(carData)
             setCarComments(carData.comments)
         })
@@ -47,7 +52,7 @@ let Car = () => {
 
 
     let comments = carComments.map((comment) => {
-        return <Comments key={comment.id} comment={comment}/>
+        return <Comments key={comment.id} comment={comment} deleteComment={deleteComment}/>
     })
 
 
@@ -59,58 +64,58 @@ let Car = () => {
 <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css"/>
 
 
-<section class="relative pt-12 bg-blueGray-50">
-<div class="items-center flex flex-wrap">
-  <div class="w-full md:w-4/12 ml-auto mr-auto px-4">
-    <img alt="..." class="max-w-full rounded-lg shadow-lg" src={carInfo.img}/>
+<section className="relative pt-12 bg-blueGray-50">
+<div className="items-center flex flex-wrap">
+  <div className="w-full md:w-4/12 ml-auto mr-auto px-4">
+    <img alt="..." className="max-w-full rounded-lg shadow-lg" src={carInfo.img}/>
   </div>
-  <div class="w-full md:w-5/12 ml-auto mr-auto px-4">
-    <div class="md:pr-12">
-      <h3 class="text-3xl font-semibold">{carInfo.Make} {carInfo.Model}</h3>
-      <p class="font-semibold mt-4 text-lg leading-relaxed text-blueGray-500">
+  <div className="w-full md:w-5/12 ml-auto mr-auto px-4">
+    <div className="md:pr-12">
+      <h3 className="text-3xl font-semibold">{carInfo.Make} {carInfo.Model}</h3>
+      <p className="font-semibold mt-4 text-lg leading-relaxed text-blueGray-500">
         Year:{carInfo.Year}
       </p>
-      <ul class="list-none mt-6">
-        <li class="py-2">
-          <div class="flex items-center">
+      <ul className="list-none mt-6">
+        <li className="py-2">
+          <div className="flex items-center">
             <div>
-              <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-black-600 bg-blue-200 mr-3"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+              <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-black-600 bg-blue-200 mr-3"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
   <path strokeLinecap="round" strokeLinejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
 </svg>
 </span>
             </div>
             <div>
-              <h4 class="text-blueGray-500">
+              <h4 className="text-blueGray-500">
                 Lishi: {carInfo.lishi}
               </h4>
             </div>
           </div>
         </li>
-        <li class="py-2">
-          <div class="flex items-center">
+        <li className="py-2">
+          <div className="flex items-center">
             <div>
-            <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-black-600 bg-blue-200 mr-3">
+            <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-black-600 bg-blue-200 mr-3">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
                 </svg>
             </span>
             </div>
             <div>
-              <h4 class="text-blueGray-500">Code: {carInfo.code}</h4>
+              <h4 className="text-blueGray-500">Code: {carInfo.code}</h4>
             </div>
           </div>
         </li>
-        <li class="py-2">
-          <div class="flex items-center">
+        <li className="py-2">
+          <div className="flex items-center">
             <div>
-              <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-black-600 bg-blue-200 mr-3"> 
+              <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-black-600 bg-blue-200 mr-3"> 
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
                 </svg>
               </span>
             </div>
             <div>
-              <h4 class="text-blueGray-500">Test Blade: {carInfo.test_blade}</h4>
+              <h4 className="text-blueGray-500">Test Blade: {carInfo.test_blade}</h4>
             </div>
           </div>
         </li>
@@ -118,12 +123,12 @@ let Car = () => {
     </div>
   </div>
 </div>
-<footer class="relative  pt-8 pb-6 mt-8">
-  <div class="container mx-auto px-4">
-    <div class="flex flex-wrap items-center md:justify-between justify-center">
-      <div class="w-full md:w-6/12 px-4 mx-auto text-center">
+<footer className="relative  pt-8 pb-6 mt-8">
+  <div className="container mx-auto px-4">
+    <div className="flex flex-wrap items-center md:justify-between justify-center">
+      <div className="w-full md:w-6/12 px-4 mx-auto text-center">
         
-        <div class="text-sm text-blueGray-500 font-semibold py-1">
+        <div className="text-sm text-blueGray-500 font-semibold py-1">
         <div className="">
                             <div className="w-full">
                             <div className="flex justify-center">
